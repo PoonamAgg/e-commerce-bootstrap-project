@@ -1,18 +1,21 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Button, Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import '@fortawesome/fontawesome-free/css/all.css'
-import { faYoutube, faSpotify, facFacebook } from '@fortawesome/fontawesome-free'
+
+
 
 import Card from 'react-bootstrap/Card';
 import { productsArr } from '../utils/MockData';
 import Cart from '../Cart/Cart';
+import Footer from '../Footer';
+import CartContext from '../store/CartContext';
+
 
 const Header = (props) => {
 
- 
+ const cartCtx = useContext(CartContext);
   
   return (
     <>
@@ -27,7 +30,7 @@ const Header = (props) => {
           <Nav.Link eventKey="link-2">ABOUT</Nav.Link>
         </Nav.Item>
         <Nav.Item className='ms-auto'>
-          <Button variant="warning" onClick={props.showCartHandler} >CART:{0}</Button>
+          <Button variant="warning" onClick={props.showCartHandler} >CART:{cartCtx.cart.length}</Button>
         </Nav.Item>
       </Nav>
       <Container fluid className='d-flex align-items-center justify-content-center bg-secondary text-dark p-5'>
@@ -54,7 +57,7 @@ const Header = (props) => {
                 />
                 <div className="card-body">
                   <p className="card-text text-start">Price: ${product.price}</p>
-                  <button className="btn btn-primary">Add to cart</button>
+                  <button className="btn btn-primary" onClick={cartCtx.addItems.bind(null, product)}>Add to cart</button>
                 </div>
               </div>
             </div>
@@ -65,22 +68,7 @@ const Header = (props) => {
       <Container fluid className='d-flex align-items-center justify-content-center bg-white text-black p-5'>
         <Button variant="secondary">See the Cart</Button>
       </Container>
-
-      <footer >
-        <Container fluid className='d-flex align-items-center justify-content-center bg-primary text-white p-2'>
-          <Row>
-            <Col className='text-start'>
-              <h3>The Generics</h3>
-            </Col>
-
-            <Col className='d-flex text-end'>
-              <p className='p-3'>Youtube</p>
-              <p className='p-3'>spotify</p>
-              <p className='p-3'>facebook</p>
-            </Col>
-          </Row>
-        </Container>
-      </footer>
+<Footer/>      
 
 
     </>
