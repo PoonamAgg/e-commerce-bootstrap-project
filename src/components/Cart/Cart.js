@@ -1,41 +1,58 @@
 import React, { useContext } from 'react'
-import { cartElements } from '../utils/MockData'
+import { Button, Table } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap'
 import CartContext from '../store/CartContext'
+import classes from './Cart.module.css'
 
 const Cart = (props) => {
-    const cartCtx = useContext(CartContext);
+  const cartCtx = useContext(CartContext);
 
-    // const hasItem = cartCtx.cart.length>0;
-    
+  // const hasItem = cartCtx.cart.length>0;
+
   return (
-   <Modal show = {props.showCart} onHide = {props.onClose}>
- <div className='container '>
-        <h3 className='text-start'>Cart</h3>
-        <button className = 'text-end' onClick={props.onClose}>X</button>
-        <hr/>
-        <div className='d-flex p-2 m-1'>
-            <h6>ITEM  ------  PRICE  ------  QUANTITY</h6>
-            </div>
-        {cartCtx.cart.map((product, index) => (
-          <div key={index} >
-            
-            <div className='d-flex p-5 m-2'>
-              <img src={product.imageUrl} alt={product.title} style={{ width: '25%', height: '100px' }} />
-              <h6>${product.price}</h6>
-              <h6>{product.quantity}</h6>
-              </div>
-              <button>-</button>
-              <button>+</button>
-              <hr/>
-            </div>
-          
-        ))}
-      
-      </div>
-      <h3>Total Amount: ${}</h3>
-      {<button className="btn btn-primary m-2">Purchase</button>}
-      </Modal>
+    <Modal show={props.showCart} onHide={props.onClose} animation={false}>
+
+      <Modal.Header closeButton>
+        <Modal.Title>Cart</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {cartCtx.cart.map((product, index) => (
+              <tr key={index}>
+                <td>
+                  <img src={product.imageUrl} alt={product.title} style={{ width: '80px' }} />
+                </td>
+                <td > {product.title}</td>
+                <td> ${product.price} </td>
+                <td>  {product.quantity} </td>
+                <td>
+                  <div className={classes.parent}>
+                    <Button variant='outline-warning'>-</Button>
+                    <Button variant='outline-warning'>+</Button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={props.onClose}>Close</Button>
+        <Button variant="secondary">Purchase</Button>
+      </Modal.Footer>
+    </Modal>
+
+
   )
 }
 

@@ -3,14 +3,11 @@ import { Button, Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-
-
-import Card from 'react-bootstrap/Card';
 import { productsArr } from '../utils/MockData';
 import Cart from '../Cart/Cart';
 import Footer from '../Footer';
 import CartContext from '../store/CartContext';
+import { Link, NavLink } from 'react-router-dom';
 
 
 const Header = (props) => {
@@ -27,7 +24,7 @@ const Header = (props) => {
           <Nav.Link eventKey="link-1">STORE</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-2">ABOUT</Nav.Link>
+          <NavLink to="/About" eventKey="link-2">ABOUT</NavLink>
         </Nav.Item>
         <Nav.Item className='ms-auto'>
           <Button variant="warning" onClick={props.showCartHandler} >CART:{cartCtx.cart.length}</Button>

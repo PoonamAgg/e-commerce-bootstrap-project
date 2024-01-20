@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
 import './App.css';
 import Header from './components/header/Header';
-import { Button } from 'react-bootstrap';
+import {createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Cart from './components/Cart/Cart';
+import About from './pages/About';
+
+const router = createBrowserRouter([
+  {
+    path:'/About' , element:<About/>},
+   { path : '/', element:<Header/>}
+]);   
 
 function App() {
   const [show, setShow] = useState(false);
@@ -16,9 +23,9 @@ function App() {
   }
   return (
    <>
-   {/* <Header/> */}
-    <Header showCartHandler = {showCartHandler}/>
-    {show && <Cart onClose = {hideCartHandler} showCart = {showCartHandler}/>}
+   <RouterProvider router = {router}/>
+    {/* <Header showCartHandler = {showCartHandler}/>
+    {show && <Cart onClose = {hideCartHandler} showCart = {showCartHandler}/>} */}
    </>
   );
 }
