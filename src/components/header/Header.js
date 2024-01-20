@@ -18,7 +18,7 @@ const Header = (props) => {
     <>
       <Nav className="justify-content-center bg-dark text-light p-2" activeKey="/home">
         <Nav.Item>
-          <Nav.Link href="/home">HOME</Nav.Link>
+          <NavLink to = '/Index'>HOME</NavLink>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link eventKey="link-1">STORE</Nav.Link>
